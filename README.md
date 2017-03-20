@@ -17,4 +17,4 @@ It is recommended to have ethernet connection for your pi.
 
 The USB soundcard has to be set as the default device. To do so you need to modify two files with the following contents. #check the powerpoint. list the filename and content by your own hindia
 
-If you are using Raspbian Jessie, you have to roll back alsa-utils to an early version by #powerpoin on how. your task hindia
+If you are using Raspbian Jessie, you have to roll back alsa-utils to an early version by #powerpoint on how. your task hindia
