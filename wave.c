@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "screen.h"
+#include "comm.h"
 
 void fillID(const char *s, char d[]){
 	int i;
@@ -40,32 +41,62 @@ void TestTone (int freq, double d){
 	fclose(fp);
 
 }
+
+//calculates 1 sec samples into 80 pieces of RMS value. each calculates by 1600/80 columns=200
+//however, only 8 pieces of RMS data are sent to the server fast mode of sound level meter(SLM)
+
 void displayWAVdata(short int d[]){
 	int i,j;
-	double sum200, rms200;
+	double sum200, rms200, max200=0.0, min200=20000.0;
+	//following variables are used to calculate rms2000 (fast leq values)
+	double Leqf[8], sum2000=0.0;
+
 	for(i=0; i<80; ++i){	//80 is the number of columns of the terminal window
-		sum200=0.0; 	//initializes the accumulator	  
+		sum200=0.0; 	//initializes the accumulator
 		for(j=0; j<SAMPLE_RATE/80; ++j){
 			sum200 +=(*d)*(*d);	//same as d[i] mnamn
 			d++;			//pointer increement
 		}
-		rms200=sqrt(sum200/(SAMPLE_RATE/80));
-#ifdef DEBUG
-		
-	printf("%d %10.2f ", i, rms200);
-#else
-	setFGcolor(BLUE);
-	displayBar(rms200, i+1);
-	resetColors();
-#endif	
-}
+		sum2000 +=sum200;
+		if(i%10==9){	//for every 10 pieces of rms200, we get an rms2000
+			Leqf[i/10]=sqrt(sum2000/(SAMPLE_RATE/8));
+			sum2000=0.0;	//reset sum2000
+		}
 
+		rms200=sqrt(sum200/(SAMPLE_RATE/80));
+		//find decibel value of sound using logirithm
+	       	rms200=20*log10(rms200);
+		//find max and min value of rms200
+		if(rms200<min200)min200=rms200;
+		if(rms200>max200)max200=rms200;
+
+#ifdef DEBUG	//conditional compiling
+
+		printf("%d %10.2f ", i, rms200);
+
+#else
+		setFGcolor(BLUE);
+		displayBar(rms200, i+1);
+		resetColors();
+#endif
+	}	// end of for(i)
+
+//display max200 and min200 in debug mode
+#ifdef DEBUG
+	printf("\nmin=%.2f max=%.2f\n",min200, max200);
+#endif
+
+//send data to server if comm is defined
+#ifdef COMM
+	send_data_curl(Leqf);
+#endif
 }
 
 void displayWAVHDR(WAVHDR hdr){
 	double duration;
 	duration=(double)hdr.Subchunk2Size/hdr.ByteRate;
-#ifdef DEBUG	
+
+#ifdef DEBUG
 	printf("ChunkID: "); printID(hdr.ChunkID);
 	printf("ChunkSize: %d\n", hdr.ChunkSize);
 	printf("Format: "); printID(hdr.Format);
@@ -86,6 +117,7 @@ void displayWAVHDR(WAVHDR hdr){
 	gotoXY(1,20); setFGcolor(YELLOW);printf("%d sps", hdr.SampleRate);
 	resetColors();
 #endif
+
 }
 
 void printID(char id[]){

@@ -1,5 +1,5 @@
 /* this header file contains a wave header information as a struct. it also contains necessary
-* constant definitions and function prototypes used in this project*/
+ constant definitions and function prototypes used in this project*/
 
 typedef struct {
 	char ChunkID[4];
@@ -17,7 +17,7 @@ typedef struct {
 	int Subchunk2Size;
 }WAVHDR;
 
-//#define DEBUG //conditional compiling 
+//#define DEBUG 1//for conditional compiling 
 #define SAMPLE_RATE 16000
 #define PI 3.1415926
 
