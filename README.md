@@ -10,7 +10,8 @@ Table of content
 1. Configuration instruction
 2. Installation instruction
 3. operating instruction
-
+4. list of project files
+------------------------------------------
 
 1.Configuration
 
@@ -39,3 +40,13 @@ ctl.!default{
 }
 
 If you are using Raspbian Jessie, you have to roll back alsa-utils to an early version by #powerpoint on how. your task hindia
+
+2.
+
+3.Operating instruction
+
+After the installation, simply execute "./wave.a" in the project file
+
+4. List of project files
+
+The project 
