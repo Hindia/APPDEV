@@ -1,20 +1,41 @@
 # my README file for project APPDEV
-Raspberry pi acoustic sensor project
+----------------------------------------
+	Acoustic sensor using RPi3
+-----------------------------------------
+
 
 This project will turn a raspberry pi 3 into an acoustic sensor.
 
+Table of content 
+1. Configuration instruction
+2. Installation instruction
+3. operating instruction
+
+
 1.Configuration
+
+This section contains two parts:hardware and software configuration
 
 1.1 Hardware configuration
 
-A raspberry pi is recommended if an older version of pi is used, corresponding configuration might be changed.
+A project done using raspberry pi. It is recommended an older version of pi is used, corresponding configuration might be changed.
 
 The pi is mounted with USB sound card and a microphone is also plugged.
 
-It is recommended to have ethernet connection for your pi.
+It is recommended to have ethernet connection for your pi. A USB sound card as well as a microphone is needed.
 
 1.2. Software configuration
 
-The USB soundcard has to be set as the default device. To do so you need to modify two files with the following contents. #check the powerpoint. list the filename and content by your own hindia
+The USB soundcard has to be set as the default device. To do so you need to modify two files which are asound.conf in etc folder and .asoundrc file. you put the following content.
+pcm.!default {
+	type plug
+	slave {
+		pcm "hw:1,0"
+	}
+}
+ctl.!default{
+	type hw 
+	card 1
+}
 
 If you are using Raspbian Jessie, you have to roll back alsa-utils to an early version by #powerpoint on how. your task hindia
