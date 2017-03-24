@@ -50,7 +50,7 @@ If you are using Raspbian Jessie, you have to roll back alsa-utils to an early v
 
 3.OPERATING INSTRUCTION
 
-After the installation, simply execute "./wave.a" in the project file
+After the installation, simply execute "./sound.a" in the project file
 
 -----------------------------
 
