@@ -3,7 +3,7 @@
 #include <curl/curl.h>
 #include <string.h>
 
-//
+//send_data_curl function defined
 void send_data_curl(double Leq[]){
 	char postdata[200]="data=", temp[30];
 	int i;
@@ -13,7 +13,7 @@ void send_data_curl(double Leq[]){
 		sprintf(temp,(i==7)?"%.2f":"%.2f;",Leq[i]);
 		strcat(postdata, temp);	//appends temp to postdata
 	}
-	printf("%s\n", postdata);
+//	printf("%s\n", postdata);
 	curl_global_init(CURL_GLOBAL_ALL);
 	curl = curl_easy_init();
 	if(curl){

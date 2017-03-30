@@ -1,6 +1,5 @@
-/*this program is just for testing. it is not part of the project*/
-
-#include "wave.h"	//use double quotes if you are using your own header. for c library headers we use angular brackets
+//headers
+#include "wave.h"
 #include <stdio.h>
 #include <math.h>
 #include "screen.h"
@@ -48,55 +47,55 @@ void TestTone (int freq, double d){
 void displayWAVdata(short int d[]){
 	int i,j;
 	double sum200, rms200, max200=0.0, min200=20000.0;
-	//following variables are used to calculate rms2000 (fast leq values)
+	//the following variables are used to calculate rms2000 (fast leq values)
 	double Leqf[8], sum2000=0.0;
-
 	for(i=0; i<80; ++i){	//80 is the number of columns of the terminal window
 		sum200=0.0; 	//initializes the accumulator
 		for(j=0; j<SAMPLE_RATE/80; ++j){
-			sum200 +=(*d)*(*d);	//same as d[i] mnamn
+			sum200 +=(*d)*(*d);	//sum updated
 			d++;			//pointer increement
 		}
 		sum2000 +=sum200;
 		if(i%10==9){	//for every 10 pieces of rms200, we get an rms2000
+
 			Leqf[i/10]=sqrt(sum2000/(SAMPLE_RATE/8));
 			sum2000=0.0;	//reset sum2000
 		}
 
 		rms200=sqrt(sum200/(SAMPLE_RATE/80));
-		//find decibel value of sound using logirithm
+		//finds decibel value of sound using logirithm
 	       	rms200=20*log10(rms200);
-		//find max and min value of rms200
+		//finds max and min value of rms200
 		if(rms200<min200)min200=rms200;
 		if(rms200>max200)max200=rms200;
 
-#ifdef DEBUG	//conditional compiling
-
+#ifdef DEBUG	//performs conditional compiling
 		printf("%d %10.2f ", i, rms200);
-
 #else
 		setFGcolor(BLUE);
 		displayBar(rms200, i+1);
 		resetColors();
 #endif
-	}	// end of for(i)
+	}	// end of for loop
 
-//display max200 and min200 in debug mode
+//displays max200 and min200 in debug mode
 #ifdef DEBUG
 	printf("\nmin=%.2f max=%.2f\n",min200, max200);
 #endif
 
-//send data to server if comm is defined
+//sends data to server if comm is defined
 #ifdef COMM
 	send_data_curl(Leqf);
 #endif
 }
 
+//function to display wave header
 void displayWAVHDR(WAVHDR hdr){
 	double duration;
 	duration=(double)hdr.Subchunk2Size/hdr.ByteRate;
 
-#ifdef DEBUG
+#ifdef DEBUG	//displays the info below if in debug mode
+
 	printf("ChunkID: "); printID(hdr.ChunkID);
 	printf("ChunkSize: %d\n", hdr.ChunkSize);
 	printf("Format: "); printID(hdr.Format);
@@ -112,6 +111,7 @@ void displayWAVHDR(WAVHDR hdr){
 	printf("Subchunk2Size: %d\n", hdr.Subchunk2Size);
 	printf("Duration of Audio %.3f sec\n", duration);
 #else
+
 	gotoXY(1,1); setFGcolor(RED); printf("%.2f sec", duration);
 	gotoXY(1,10); setFGcolor(CYAN);printf("%d bit/s", hdr.BitsPerSample);
 	gotoXY(1,20); setFGcolor(YELLOW);printf("%d sps", hdr.SampleRate);
