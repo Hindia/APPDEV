@@ -58,22 +58,22 @@ After the installation, simply execute "./sound.a" in the project file
 
 The project contains the following files:-
 
--- makefile: makefile of this project
+- makefile: makefile of this project
 
--- wave.c: program conataining functions used to process wave files
+- wave.c: program conataining functions used to process wave files
 
--- wave.h: contains the headers of wave.c
+- wave.h: contains the headers of wave.c
 
--- screen.c: module containing the screen manipulation
+- screen.c: module containing the screen manipulation
 
---screen.h: headers used in the the screen.c file
+-screen.h: headers used in the the screen.c file
 
---comm.c: communication module of the project to the webpage. Uses CURL
+-comm.c: communication module of the project to the webpage. Uses CURL
 
---comm.h: contains headers of comm.c
+-comm.h: contains headers of comm.c
 
---main.c: contains the main function
+-main.c: contains the main function
 
---sound.php: the server webpage used to receive sound data 
+-sound.php: the server webpage used to receive sound data 
 
---show.html: the server page which visualizes the data 
+-show.html: the server page which visualizes the data 
