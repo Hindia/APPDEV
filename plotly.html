@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+
+<body>
+  
+  <div id="myDiv" style="width: 1000px; height: 600px;"></div>
+  <script>
+   //$data=$_POST['data'];	//data to be written, samples from the record
+   //$today=date("Y-m-d H:i:s");	//current time
+ var trace1 = {
+	x: [1, 2], 
+	y: [3,4], 
+	type: 'scatter'
+};
+
+var data = [trace1];
+Plotly.newPlot('myDiv', data);
+  </script>
+ <script type="text/javascript">
+   /* setTimeout (
+        function() { window.location.reload(); },
+        1000
+   )*/
+//</script>
+</body>
+</html>
