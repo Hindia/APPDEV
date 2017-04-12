@@ -20,11 +20,11 @@ This section contains two parts:hardware and software configuration
 
 1.1 HARDWARE CONFIGURATION
 
-A project done using raspberry pi. It is recommended an older version of pi is used, corresponding configuration might be changed.
+This project is done using raspberry pi. It is recommended an older version of pi is used, corresponding configuration might be changed.
 
-The pi is mounted with USB sound card and a microphone is also plugged.
+The pi is mounted with USB sound card and a microphone is also plugged. It is recommended to have ethernet connection for your pi. A USB sound card as well
 
-It is recommended to have ethernet connection for your pi. A USB sound card as well as a microphone is needed.
+as a microphone is needed.
 
 1.2. SOFTWARE CONFIGURATION
 
@@ -69,7 +69,8 @@ First insert your sd card into the Raspberry pi then connect the ethernet cable 
 
 3.OPERATING INSTRUCTION
 
-After the installation, simply execute "./sound.a" in the project file
+After the installation, simply execute "./sound.a" in the project file. Press "CTRL + C" to stop the execution. You can get the data accumulated when the 
+program was running at http://www.cc.puv.fi/~e1500943/php/soundlog.txt
 
 -----------------------------
 
@@ -95,4 +96,4 @@ The project contains the following files:-
 
 - sound.php: the server webpage used to receive sound data 
 
-- show.html: the server page which visualizes the data 
+- sound.html: the server page which visualizes the data using a graph 
