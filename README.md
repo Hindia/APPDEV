@@ -70,7 +70,7 @@ First insert your sd card into the Raspberry pi then connect the ethernet cable 
 3.OPERATING INSTRUCTION
 
 After the installation, simply execute "./sound.a" in the project file. Press "CTRL + C" to stop the execution. You can get the data accumulated when the 
-program was running at http://www.cc.puv.fi/~e1500943/php/soundlog.txt
+program was running at http://www.cc.puv.fi/~e1500943/php/soundtest.log
 
 -----------------------------
 
