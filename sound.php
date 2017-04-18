@@ -1,3 +1,5 @@
+//this php file gets data from the sensor and stores it in .log file
+
 <?php
 $data=$_POST['data'];
 $ip=$_SERVER['REMOTE_ADDR'];	//client's ip add

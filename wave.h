@@ -17,7 +17,7 @@ typedef struct {
 	int Subchunk2Size;
 }WAVHDR;
 
-//#define DEBUG 1//for conditional compiling 
+#define DEBUG 1//for conditional compiling 
 #define SAMPLE_RATE 16000
 #define PI 3.1415926
 
