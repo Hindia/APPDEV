@@ -1,5 +1,8 @@
 <!DOCTYPE HTML>
 <html>
+<head>
+<title>RaspberryPi3_SoundServer - Plot</title>
+</head>
 <body>
 <style type="text/css">
 #container {
@@ -20,13 +23,18 @@ Highcharts.chart('sound', {
         text: 'Acoustic Sensor'
     },
 
-    subtitle: {
-        text: 'Source: RaspberryPi3 '
+    xAxis: {
+	tickPixelInterval:150,
+        title: {
+            text: 'Time in seconds',
+	    margin: 15
+        }
     },
 
     yAxis: {
         title: {
-            text: 'Sound strength in dB'
+            text: 'Sound strength in dB',
+	    margin: 15
         }
     },
     legend: {
@@ -42,11 +50,12 @@ Highcharts.chart('sound', {
     },
 
     series: [{
-        name: 'Sound',
+        name: 'Sound dB',
         data: [4, 5, 5, 6, 9, 1, 1, 1]
     }]
 
 });
+
 </script>
 </body>
 </html>
