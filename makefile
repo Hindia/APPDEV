@@ -1,3 +1,5 @@
+#makefile code
+
 OBJ= main.o wave.o screen.o comm.o
 APPNAME = sound.a
 
