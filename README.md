@@ -1,3 +1,4 @@
+Link to my github for this project is https://github.com/Hindia/APPDEV
 
 ----------------------------------------
 	Acoustic sensor using RPi3
@@ -12,6 +13,7 @@ Table of contents
 2. Installation instruction
 3. operating instruction
 4. list of project files
+
 ------------------------------------------
 
 1.CONFIGURATION
@@ -70,7 +72,9 @@ First insert your sd card into the Raspberry pi then connect the ethernet cable 
 3.OPERATING INSTRUCTION
 
 After the installation, simply execute "./sound.a" in the project file. Press "CTRL + C" to stop the execution. You can get the data accumulated when the 
-program was running at http://www.cc.puv.fi/~e1500943/php/soundtest.log
+program was running at http://www.cc.puv.fi/~e1500943/php/soundtest.log you can also look at the graph created using the sample recordings from the log file at
+http://www.cc.puv.fi/~e1500943/php/sound.html
+
 
 -----------------------------
 
@@ -96,4 +100,4 @@ The project contains the following files:-
 
 - sound.php: the server webpage used to receive sound data 
 
-- sound.html: the server page which visualizes the data using a graph 
+- sound.html: the web page which visualizes the data using a graph 
