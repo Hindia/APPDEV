@@ -1,38 +1,37 @@
-//headers
+//headers included
 #include "wave.h"
 #include <stdio.h>
 #include <math.h>
 #include "screen.h"
 #include "comm.h"
 
-void fillID(const char *s, char d[]){
+void fillID(const char *s, char d[]){	//function for filling the wave ID
 	int i;
 	for(i=0; i<4; i++) d[i]=*s++;
-	
 
 }
 
-void TestTone (int freq, double d){
-	FILE *fp;
+void TestTone (int freq, double d){	//function for generating a test tone
+	FILE *fp;	//file pointer defined
 	int i;
-	WAVHDR h;
-	short int sample;
-	fp=fopen("testtonestereo.wav", "w");
-	fillID("RIFF", h.ChunkID);
+	WAVHDR h;	//wave header defined
+	short int sample;	//variable for sample
+	fp=fopen("testtonestereo.wav", "w");	//file opened to write the wav file
+	fillID("RIFF", h.ChunkID);	//fills the ID of the wav file
 	//ChunkSize will be calculated later
-	fillID("WAVE", h.Format);
-	fillID("fmt ", h.Subchunk1ID);
-	h.Subchunk1Size=16;
-	h.AudioFormat=1;
-	h.NumChannels=1;
-	h.SampleRate=SAMPLE_RATE;
-	h.BitsPerSample=16;
-	h.ByteRate=SAMPLE_RATE*h.NumChannels*(h.BitsPerSample/8);
-	h.BlockAlign=h.NumChannels*(h.BitsPerSample/8);
-	fillID("data", h.Subchunk2ID);
-	h.Subchunk2Size=(int)d*h.ByteRate;
-	h.ChunkSize=h.Subchunk2Size+36;
-	fwrite(&h, sizeof(h), 1, fp);
+	fillID("WAVE", h.Format);	//fills the format of the WAV file
+	fillID("fmt ", h.Subchunk1ID);	//fills the ID of the wave file of the test tone
+	h.Subchunk1Size=16;	//sets the subcunk size of the test tone
+	h.AudioFormat=1;	//sets the audio format of the test tone
+	h.NumChannels=1;	//sets the number of channles of the test tone
+	h.SampleRate=SAMPLE_RATE;	//sets the sample rate of the test tone
+	h.BitsPerSample=16;	//sets the bits per sample of the test tone
+	h.ByteRate=SAMPLE_RATE*h.NumChannels*(h.BitsPerSample/8);	//calculates the byte rate of the test tone
+	h.BlockAlign=h.NumChannels*(h.BitsPerSample/8);	//calculates the block align
+	fillID("data", h.Subchunk2ID);	//fills the ID
+	h.Subchunk2Size=(int)d*h.ByteRate;	//calculates the size
+	h.ChunkSize=h.Subchunk2Size+36;	//calculates the chunk size
+	fwrite(&h, sizeof(h), 1, fp);	//writes the header with the infos
 	for(i=0; i<d*SAMPLE_RATE; i++){
 		sample=32768*sin(2*PI*freq*i/SAMPLE_RATE);
 		fwrite(&sample, sizeof(sample), 1, fp);
@@ -44,7 +43,7 @@ void TestTone (int freq, double d){
 //calculates 1 sec samples into 80 pieces of RMS value. each calculates by 1600/80 columns=200
 //however, only 8 pieces of RMS data are sent to the server fast mode of sound level meter(SLM)
 
-void displayWAVdata(short int d[]){
+void displayWAVdata(short int d[]){	//function to display the wave data
 	int i,j;
 	double sum200, rms200, max200=0.0, min200=20000.0;
 	//the following variables are used to calculate rms2000 (fast leq values)
@@ -120,7 +119,7 @@ void displayWAVHDR(WAVHDR hdr){
 
 }
 
-void printID(char id[]){
+void printID(char id[]){	//function to print the ID of the file
 	int i;
 	for(i=0; i<4;i++) putchar(id[i]);
 	printf("\n");
