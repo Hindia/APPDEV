@@ -1,61 +1,45 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>RaspberryPi3_SoundServer - Plot</title>
+<title>SLM using Raspberry Pi</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+<script type="text/javascript">
+window.onload = function () {	//function executes when window is loaded 
+var dataPoints = [];	//array for holding x and y values for the plot
+
+//log file's path where the samples recorded are stored 
+$.get("http://www.cc.puv.fi/~e1500943/php/soundtest.log", function(data) {
+	var x = 1;	//value of x coordinate initialised from 1
+	var allLines = data.split(';');	//holds the values split by ; in every line
+	if(allLines.length > 0) {	//loop runs as long as there is a sample recorded in each line
+		for(var i=0; i < allLines.length; i++) {	//counter initialised and updates
+			dataPoints.push({x: x, y: parseFloat(allLines[i])});	//assigns x and y values. x increases by 1 and y from the recorded value in the log file
+			x += 1; //value of x increases by 1
+		}
+	}
+	var chart = new CanvasJS.Chart("chartContainer",{	//char container is defined 
+		zoomEnabled: true,	//enables zooming
+		title :{
+			text: "Acoustic sensor"	//title of the graph is assigned
+		},
+		axisX:{
+			title: "Time in seconds"	//X axis named
+		},
+		axisY: {
+			title: "Sound level in dB"	//Y axis named
+		},
+		data: [{
+			type: "line",	//type of the graph connecting the data is assigned
+			dataPoints : dataPoints,	//data points are gotten from the array dataPoints
+		}]
+	});
+	chart.render();	//makes the chart
+});
+}
+</script>
+<script type="text/javascript" src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body>
-<style type="text/css">
-#container {
-	min-width: 310px;
-	max-width: 800px;
-	height: 400px;
-	margin: 0 auto
-}
-</style>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-
-<div id="sound"></div>
-<script>
-Highcharts.chart('sound', {
-
-    title: {
-        text: 'Acoustic Sensor'
-    },
-
-    xAxis: {
-	tickPixelInterval:150,
-        title: {
-            text: 'Time in seconds',
-	    margin: 15
-        }
-    },
-
-    yAxis: {
-        title: {
-            text: 'Sound strength in dB',
-	    margin: 15
-        }
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-
-    plotOptions: {
-        series: {
-            pointStart: 1
-        }
-    },
-
-    series: [{
-        name: 'Sound dB',
-        data: [4, 5, 5, 6, 9, 1, 1, 1]
-    }]
-
-});
-
-</script>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
 </body>
 </html>

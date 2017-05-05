@@ -1,9 +1,6 @@
-//this php file gets data from the sensor and stores it in .log file
-
 <?php
-$data=$_POST['data'];
+$data=$_POST['data'];	//data to be written, samples from the record
 $ip=$_SERVER['REMOTE_ADDR'];	//client's ip add
-$today=date("Y-m-d H:i:s");	//current time
 $file="soundtest.log"; 	//specifies the log file name
 if(file_exists($file)){
 	$fp=fopen($file, "a");	//open file in append mode
@@ -11,8 +8,7 @@ if(file_exists($file)){
 else{
 	$fp=fopen($file, "w");	//open file in write mode
 }
-$record=$today. "," .$data. "\n";	//line to be written to a file written in CSV(comma separated value) format
+$record=$data. "\n";	//line to be written to a file written in CSV(comma separated value) format
 fwrite($fp, $record);	//writes to file
 fclose($fp);	//closes file
-echo "data stored\n";
 ?>
