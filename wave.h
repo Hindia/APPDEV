@@ -17,11 +17,11 @@ typedef struct {
 	int Subchunk2Size;
 }WAVHDR;
 
-#define DEBUG 1//for conditional compiling 
-#define SAMPLE_RATE 16000
-#define PI 3.1415926
+#define DEBUG 1	//for conditional compiling
+#define SAMPLE_RATE 16000	//sample rate is defined
+#define PI 3.1415926	//PI is defined
 
-//function prototypes
+//function prototypes to be defined in the wave.c folder
 
 void displayWAVHDR(WAVHDR hdr);
 void printID(char *);
